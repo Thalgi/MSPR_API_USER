@@ -1,2 +1,2 @@
-# MSPR_API_USER
-API USER du MSPR-Cafe
+# MSPR_API_BASE
+API de base pour le projet MSPR.
