@@ -22,7 +22,7 @@ class User:
         self.address = user_data["address"]
         self.profile = user_data["profile"]
         self.company = user_data["company"]
-        self.id = user_data["id"]
+        self.user_id = user_data["id"]
         self.orders = user_data["orders"]
 
 
@@ -96,10 +96,10 @@ class UserStore:
 
     def load_users(self):
         """
-        Load users from the file and return a dictionary with user ids as keys
+        Load users from a file
         """
-        with open(self.file_path, 'r') as f:
-            data = json.load(f)
+        with open(self.file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
         return {user_data['id']: User(user_data) for user_data in data}
 
     def create(self, user_data):
@@ -144,5 +144,5 @@ class UserStore:
         Save the current state of users to the file
         """
         data = [vars(user) for user in self.users.values()]
-        with open(self.file_path, 'w') as f:
-            json.dump(data, f)
+        with open(self.file_path, 'w', encoding='utf-8') as file:
+            json.dump(data, file)
