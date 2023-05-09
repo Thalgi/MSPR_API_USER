@@ -1,18 +1,22 @@
+# pylint: disable=too-few-public-methods
+
 """
 Main module for the CherryPy-based microservice
 """
 
-import cherrypy
 import json
+import cherrypy
 
 from classes.user import UserStore
 from classes.user import UserApi
 from constants import URL, PORT, MS_NAME
 
+
 class UserMicroservice:
     """
     Health check class for the microservice
     """
+
     @cherrypy.expose
     @cherrypy.tools.allow(methods=['GET'])
     def is_alive(self):
@@ -21,10 +25,12 @@ class UserMicroservice:
         """
         return f"The microservice |{MS_NAME}| is alive"
 
+
 class EchoApi:
     """
     Echo API class for testing purposes
     """
+
     @cherrypy.expose
     @cherrypy.tools.allow(methods=['GET'])
     def echo(self, message):
@@ -32,6 +38,7 @@ class EchoApi:
         Echo endpoint that returns the input message
         """
         return f"Echo: {message}"
+
 
 def main():
     """
@@ -59,6 +66,7 @@ def main():
     cherrypy.tree.mount(echo_api, '/echo', config=app_config)
     cherrypy.engine.start()
     cherrypy.engine.block()
+
 
 if __name__ == '__main__':
     main()
